@@ -1,9 +1,13 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mySprite.isHittingTile(CollisionDirection.Top)) {
+    while (mySprite.isHittingTile(CollisionDirection.Bottom) == true) {
         mySprite.vy += -60
+    }
+    while (mySprite.isHittingTile(CollisionDirection.Bottom) == false) {
+        mySprite.vy += 60
     }
 })
 let mySprite: Sprite = null
+mySprite.ay += 60
 scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
