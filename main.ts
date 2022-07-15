@@ -1,13 +1,14 @@
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
+	
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    while (mySprite.isHittingTile(CollisionDirection.Bottom) == true) {
-        mySprite.vy += -60
-    }
-    while (mySprite.isHittingTile(CollisionDirection.Bottom) == false) {
-        mySprite.vy += 60
+    if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
+        for (let index = 0; index < 1; index++) {
+            mySprite.vy = -60
+        }
     }
 })
 let mySprite: Sprite = null
-mySprite.ay += 60
 scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -131,6 +132,42 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
 tiles.setCurrentTilemap(tilemap`level3`)
+let Goomba = sprites.create(img`
+    . . . . . . e e e e . . . . . . 
+    . . . . . e e e e e e . . . . . 
+    . . . . e e e e e e e e . . . . 
+    . . . e f f e e e e f f e . . . 
+    . . e e e d f e e f d e e e . . 
+    . . e e e d f e e f d e e e . . 
+    . e e e e d f e e f d e e e e . 
+    . 3 e 3 e d f d d f d 3 e 3 e . 
+    . e 3 e 3 d d d d d d e 3 e 3 . 
+    . e e e e e e e e e e e e e e . 
+    . . e e e d d d d d d e e e . . 
+    . . . . d d d d d d d d . . . . 
+    . . f f d d d d d d d d f f . . 
+    . f f f f f d d d d f f f f f . 
+    . f f f f f f . . f f f f f f . 
+    . . f f f f f . . f f f f f . . 
+    `, SpriteKind.Player)
+let Coin = sprites.create(img`
+    . . . . . f f f f f f . . . . . 
+    . . . f f f 1 1 1 f f f f . . . 
+    . . f f 1 1 5 5 5 5 5 f f . . . 
+    . . f 1 5 5 1 1 1 f 5 5 f f . . 
+    . f f 1 5 5 1 5 5 f 5 5 f f . . 
+    . f 1 5 5 5 1 5 5 f 5 5 5 f f . 
+    . f 1 5 5 5 1 5 5 f 5 5 5 f f . 
+    . f 1 5 5 5 1 5 5 f 5 5 5 f f . 
+    . f 1 5 5 5 1 5 5 f 5 5 5 f f . 
+    . f 1 5 5 5 1 5 5 f 5 5 5 f f . 
+    . f 1 5 5 5 1 5 5 f 5 5 5 f f . 
+    . f f 1 5 5 1 5 5 f 5 5 f f . . 
+    . . f 1 5 5 f f f f 5 5 f f . . 
+    . . f f 1 5 5 5 5 5 5 f f . . . 
+    . . . f f f 5 5 5 f f f f . . . 
+    . . . . . f f f f f . . . . . . 
+    `, SpriteKind.Player)
 mySprite = sprites.create(img`
     . . f f f f f f f f f f . . . . 
     . f e e e e e e e e e e f . . . 
@@ -149,5 +186,7 @@ mySprite = sprites.create(img`
     . . f 6 9 9 f f 6 9 9 f . . . . 
     . . . f f f . . f f f . . . . . 
     `, SpriteKind.Player)
-controller.moveSprite(mySprite, 100, 0)
+mySprite.ay += 60
 scene.cameraFollowSprite(mySprite)
+mySprite.setPosition(8, 8)
+controller.moveSprite(mySprite, 80, 0)
