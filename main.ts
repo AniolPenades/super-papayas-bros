@@ -1,12 +1,12 @@
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
-	
-})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
         for (let index = 0; index < 1; index++) {
             mySprite.vy = -60
         }
     }
+})
+info.onLifeZero(function () {
+    game.over(false)
 })
 let mySprite: Sprite = null
 scene.setBackgroundImage(img`
@@ -208,3 +208,17 @@ mySprite.ay += 60
 scene.cameraFollowSprite(mySprite)
 mySprite.setPosition(8, 8)
 controller.moveSprite(mySprite, 80, 0)
+info.setLife(1)
+info.setScore(0)
+if (mySprite.overlapsWith(Seta)) {
+    if (info.life() == 1) {
+        info.changeLifeBy(2)
+        Seta.destroy()
+    } else {
+        info.setScore(50)
+        Seta.destroy()
+    }
+}
+if (info.score() == 1000) {
+    info.changeLifeBy(3)
+}
