@@ -5,6 +5,18 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    scroller.scrollBackgroundWithSpeed(20, 0)
+})
+controller.right.onEvent(ControllerButtonEvent.Released, function () {
+    scroller.scrollBackgroundWithSpeed(0, 0)
+})
+controller.left.onEvent(ControllerButtonEvent.Released, function () {
+    scroller.scrollBackgroundWithSpeed(0, 0)
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    scroller.scrollBackgroundWithSpeed(-20, 0)
+})
 info.onLifeZero(function () {
     game.over(false)
 })
