@@ -1,10 +1,15 @@
 enum ActionKind {
     Walking,
     Idle,
-    Jumping
+    Jumping,
+    Caminando_hacia_Derecha,
+    Caminando_hacia_Izquierda
 }
 function IniciarAnimaciones () {
     IniciarAnimacioesHero()
+}
+function MirarAnimacion () {
+	
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Hero.isHittingTile(CollisionDirection.Bottom)) {
@@ -15,9 +20,11 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     scroller.scrollBackgroundWithSpeed(20, 0)
+    animation.setAction(Hero, ActionKind.Caminando_hacia_Izquierda)
 })
 function IniciarAnimacioesHero () {
     AnimacionCaminar()
+    MirarAnimacion()
 }
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     scroller.scrollBackgroundWithSpeed(0, 0)
@@ -26,7 +33,7 @@ controller.left.onEvent(ControllerButtonEvent.Released, function () {
     scroller.scrollBackgroundWithSpeed(0, 0)
 })
 function AnimacionCaminar () {
-    CaminarPaDerecha = animation.createAnimation(ActionKind.Walking, 300)
+    CaminarPaIzquierda = animation.createAnimation(ActionKind.Caminando_hacia_Izquierda, 300)
     animation.attachAnimation(Hero, CaminarPaDerecha)
     CaminarPaDerecha.addAnimationFrame(img`
         . . . . . . . . . . . . . . . . 
@@ -100,7 +107,7 @@ function AnimacionCaminar () {
         . f 9 9 6 f 9 9 6 f f . . . . . 
         . f f f f . f f f . . . . . . . 
         `)
-    CaminarPaIzquierda = animation.createAnimation(ActionKind.Walking, 300)
+    CaminarPaDerecha = animation.createAnimation(ActionKind.Caminando_hacia_Derecha, 300)
     animation.attachAnimation(Hero, CaminarPaIzquierda)
     CaminarPaDerecha.addAnimationFrame(img`
         . . . . . . . . . . . . . . . . 
@@ -177,12 +184,14 @@ function AnimacionCaminar () {
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     scroller.scrollBackgroundWithSpeed(-20, 0)
+    animation.setAction(Hero, ActionKind.Caminando_hacia_Derecha)
 })
 info.onLifeZero(function () {
     game.over(false)
 })
-let CaminarPaIzquierda: animation.Animation = null
+let Mirando_a_la_Derecha = false
 let CaminarPaDerecha: animation.Animation = null
+let CaminarPaIzquierda: animation.Animation = null
 let Hero: Sprite = null
 Hero = sprites.create(img`
     . . f f f f f f f f f f . . . . 
@@ -398,5 +407,12 @@ if (info.score() == 1000) {
     info.changeLifeBy(3)
 }
 game.onUpdate(function () {
-	
+    if (Hero.vx < 0) {
+        Mirando_a_la_Derecha = true
+    } else if (Hero.vx > 0) {
+        Mirando_a_la_Derecha = false
+    }
+    if (Hero.isHittingTile(CollisionDirection.Top)) {
+        Hero.vy = 0
+    }
 })
