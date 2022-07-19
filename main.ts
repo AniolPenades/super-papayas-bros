@@ -1,26 +1,211 @@
+enum ActionKind {
+    Walking,
+    Idle,
+    Jumping
+}
+function IniciarAnimaciones () {
+    IniciarAnimacioesHero()
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
+    if (Hero.isHittingTile(CollisionDirection.Bottom)) {
         for (let index = 0; index < 1; index++) {
-            mySprite.vy = -60
+            Hero.vy = -60
         }
     }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     scroller.scrollBackgroundWithSpeed(20, 0)
 })
+function IniciarAnimacioesHero () {
+    AnimacionCaminar()
+}
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     scroller.scrollBackgroundWithSpeed(0, 0)
 })
 controller.left.onEvent(ControllerButtonEvent.Released, function () {
     scroller.scrollBackgroundWithSpeed(0, 0)
 })
+function AnimacionCaminar () {
+    CaminarPaDerecha = animation.createAnimation(ActionKind.Walking, 300)
+    animation.attachAnimation(Hero, CaminarPaDerecha)
+    CaminarPaDerecha.addAnimationFrame(img`
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f f f . . . . . . 
+        . . f e e e e e e e f . . . . . 
+        . f e e e e e e e e e f . . . . 
+        . f d d d d e d d e e f . . . . 
+        . f d f 1 d d e d e e f . . . . 
+        . f d f f d d d e e e f . . . . 
+        . f d d d d d d d d d f . . . . 
+        . f d d d d d d d d d f . . . . 
+        . . f 8 8 8 8 8 8 8 8 f . . . . 
+        . . f 8 8 d d d 8 8 8 f . . . . 
+        . . f e b b d d b b b f . . . . 
+        . . f 9 9 9 9 9 9 9 6 f . . . . 
+        . . . f 9 9 9 9 6 f f . . . . . 
+        . . . f 9 9 9 9 6 f . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        `)
+    CaminarPaDerecha.addAnimationFrame(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f f f . . . . . . 
+        . . f e e e e e e e f . . . . . 
+        . f e e e e e e e e e f . . . . 
+        . f d d d d e d d e e f . . . . 
+        . f d f 1 d d e d e e f . . . . 
+        . f d f f d d d e e e f . . . . 
+        . f d d d d d d d d d f . . . . 
+        . f d d d d d d d d d f . . . . 
+        . . f 8 8 8 8 8 8 8 8 f . . . . 
+        . . f 8 8 8 8 d d 8 8 f . . . . 
+        . . f b e e d d d b b f f . . . 
+        . . f 9 9 9 9 9 9 9 9 9 6 f . . 
+        . . . f 9 9 6 f f 9 9 9 9 f . . 
+        . . . . f f f . f f f f f . . . 
+        `)
+    CaminarPaDerecha.addAnimationFrame(img`
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f f f . . . . . . 
+        . . f e e e e e e e f . . . . . 
+        . f e e e e e e e e e f . . . . 
+        . f d d d d e d d e e f . . . . 
+        . f d f 1 d d e d e e f . . . . 
+        . f d f f d d d e e e f . . . . 
+        . f d d d d d d d d d f . . . . 
+        . f d d d d d d d d d f . . . . 
+        . . f 8 8 8 8 8 8 8 8 f . . . . 
+        . . f 8 8 d d d 8 8 8 f . . . . 
+        . . f e b b d d b b b f . . . . 
+        . . f 9 9 9 9 9 9 9 6 f . . . . 
+        . . . f 9 9 9 9 6 f f . . . . . 
+        . . . f 9 9 9 9 6 f . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        `)
+    CaminarPaDerecha.addAnimationFrame(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . f f f f f f f . . . . . . 
+        . . f e e e e e e e f . . . . . 
+        . f e e e e e e e e e f . . . . 
+        . f d d d d e d d e e f . . . . 
+        . f d f 1 d d e d e e f . . . . 
+        . f d f f d d d e e e f . . . . 
+        . f d d d d d d d d d f . . . . 
+        . f d d d d d d d d d f . . . . 
+        . . f 8 8 8 8 8 8 8 8 f . . . . 
+        . . f d d d 8 8 8 8 8 f . . . . 
+        . . f e d d b b b b b f . . . . 
+        . . f 9 9 9 9 9 9 9 6 f . . . . 
+        . f 9 9 6 f 9 9 6 f f . . . . . 
+        . f f f f . f f f . . . . . . . 
+        `)
+    CaminarPaIzquierda = animation.createAnimation(ActionKind.Walking, 300)
+    animation.attachAnimation(Hero, CaminarPaIzquierda)
+    CaminarPaDerecha.addAnimationFrame(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f f f f . . . 
+        . . . . . f e e e e e e e f . . 
+        . . . . f e e e e e e e e e f . 
+        . . . . f e e d d e d d d d f . 
+        . . . . f e e d e d d 1 f d f . 
+        . . . . f e e e d d d f f d f . 
+        . . . . f d d d d d d d d d f . 
+        . . . . f d d d d d d d d d f . 
+        . . . . f 8 8 8 8 8 8 8 8 f . . 
+        . . . . f 8 8 8 d d d 8 8 f . . 
+        . . . . f b b b d d b b e f . . 
+        . . . . f 6 9 9 9 9 9 9 9 f . . 
+        . . . . . f f 6 9 9 9 9 f . . . 
+        . . . . . . f 6 9 9 9 9 f . . . 
+        . . . . . . . f f f f f . . . . 
+        `)
+    CaminarPaDerecha.addAnimationFrame(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f f f f . . . 
+        . . . . . f e e e e e e e f . . 
+        . . . . f e e e e e e e e e f . 
+        . . . . f e e d d e d d d d f . 
+        . . . . f e e d e d d 1 f d f . 
+        . . . . f e e e d d d f f d f . 
+        . . . . f d d d d d d d d d f . 
+        . . . . f d d d d d d d d d f . 
+        . . . . f 8 8 8 8 8 8 8 8 f . . 
+        . . . . f 8 8 d d 8 8 8 8 f . . 
+        . . . f f b b d d d e e b f . . 
+        . . f 6 9 9 9 9 9 9 9 9 9 f . . 
+        . . f 9 9 9 9 f f 6 9 9 f . . . 
+        . . . f f f f f . f f f . . . . 
+        `)
+    CaminarPaDerecha.addAnimationFrame(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f f f f . . . 
+        . . . . . f e e e e e e e f . . 
+        . . . . f e e e e e e e e e f . 
+        . . . . f e e d d e d d d d f . 
+        . . . . f e e d e d d 1 f d f . 
+        . . . . f e e e d d d f f d f . 
+        . . . . f d d d d d d d d d f . 
+        . . . . f d d d d d d d d d f . 
+        . . . . f 8 8 8 8 8 8 8 8 f . . 
+        . . . . f 8 8 8 d d d 8 8 f . . 
+        . . . . f b b b d d b b e f . . 
+        . . . . f 6 9 9 9 9 9 9 9 f . . 
+        . . . . . f f 6 9 9 9 9 f . . . 
+        . . . . . . f 6 9 9 9 9 f . . . 
+        . . . . . . . f f f f f . . . . 
+        `)
+    CaminarPaDerecha.addAnimationFrame(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f f f f . . . 
+        . . . . . f e e e e e e e f . . 
+        . . . . f e e e e e e e e e f . 
+        . . . . f e e d d e d d d d f . 
+        . . . . f e e d e d d 1 f d f . 
+        . . . . f e e e d d d f f d f . 
+        . . . . f d d d d d d d d d f . 
+        . . . . f d d d d d d d d d f . 
+        . . . . f 8 8 8 8 8 8 8 8 f . . 
+        . . . . f 8 8 8 8 8 d d d f . . 
+        . . . . f b b b b b d d e f . . 
+        . . . . f 6 9 9 9 9 9 9 9 f . . 
+        . . . . . f f 6 9 9 f 6 9 9 f . 
+        . . . . . . . f f f . f f f f . 
+        `)
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     scroller.scrollBackgroundWithSpeed(-20, 0)
 })
 info.onLifeZero(function () {
     game.over(false)
 })
-let mySprite: Sprite = null
+let CaminarPaIzquierda: animation.Animation = null
+let CaminarPaDerecha: animation.Animation = null
+let Hero: Sprite = null
+Hero = sprites.create(img`
+    . . f f f f f f f f f f . . . . 
+    . f e e e e e e e e e e f . . . 
+    . f e e e e e e e e e e e f . . 
+    . f e e d d d d d d d d d f . . 
+    . f e d d f 1 d d d f 1 d f . . 
+    f d d d d f f d d d f f d f . . 
+    f d d d d d d d f d d d d f . . 
+    . f d d d d d d d d d d d f . . 
+    . f 8 8 8 8 7 7 7 8 8 8 8 f . . 
+    . f 8 8 8 8 7 8 7 8 8 8 8 f . . 
+    . f d d d 8 7 7 7 8 8 d d f . . 
+    . f d d 8 8 7 8 8 8 8 8 d f . . 
+    . f b b b b b e e b b b f . . . 
+    . . f 6 9 9 f f 6 9 9 f . . . . 
+    . . f 6 9 9 f f 6 9 9 f . . . . 
+    . . . f f f . . f f f . . . . . 
+    `, SpriteKind.Player)
+Hero.setPosition(8, 8)
+controller.moveSprite(Hero, 80, 0)
+Hero.ay += 60
+scene.cameraFollowSprite(Hero)
 scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -198,31 +383,9 @@ let Coin = sprites.create(img`
     . . . f f f 5 5 5 f f f f . . . 
     . . . . . f f f f f . . . . . . 
     `, SpriteKind.Player)
-mySprite = sprites.create(img`
-    . . f f f f f f f f f f . . . . 
-    . f e e e e e e e e e e f . . . 
-    . f e e e e e e e e e e e f . . 
-    . f e e d d d d d d d d d f . . 
-    . f e d d f 1 d d d f 1 d f . . 
-    f d d d d f f d d d f f d f . . 
-    f d d d d d d d f d d d d f . . 
-    . f d d d d d d d d d d d f . . 
-    . f 8 8 8 8 7 7 7 8 8 8 8 f . . 
-    . f 8 8 8 8 7 8 7 8 8 8 8 f . . 
-    . f d d d 8 7 7 7 8 8 d d f . . 
-    . f d d 8 8 7 8 8 8 8 8 d f . . 
-    . f b b b b b e e b b b f . . . 
-    . . f 6 9 9 f f 6 9 9 f . . . . 
-    . . f 6 9 9 f f 6 9 9 f . . . . 
-    . . . f f f . . f f f . . . . . 
-    `, SpriteKind.Player)
-mySprite.ay += 60
-scene.cameraFollowSprite(mySprite)
-mySprite.setPosition(8, 8)
-controller.moveSprite(mySprite, 80, 0)
 info.setLife(1)
 info.setScore(0)
-if (mySprite.overlapsWith(Seta)) {
+if (Hero.overlapsWith(Seta)) {
     if (info.life() == 1) {
         info.changeLifeBy(2)
         Seta.destroy()
@@ -234,3 +397,6 @@ if (mySprite.overlapsWith(Seta)) {
 if (info.score() == 1000) {
     info.changeLifeBy(3)
 }
+game.onUpdate(function () {
+	
+})
