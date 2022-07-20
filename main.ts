@@ -189,7 +189,6 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 info.onLifeZero(function () {
     game.over(false)
 })
-let Mirando_a_la_Derecha = false
 let CaminarPaDerecha: animation.Animation = null
 let CaminarPaIzquierda: animation.Animation = null
 let Hero: Sprite = null
@@ -406,13 +405,7 @@ if (Hero.overlapsWith(Seta)) {
 if (info.score() == 1000) {
     info.changeLifeBy(3)
 }
+IniciarAnimaciones()
 game.onUpdate(function () {
-    if (Hero.vx < 0) {
-        Mirando_a_la_Derecha = true
-    } else if (Hero.vx > 0) {
-        Mirando_a_la_Derecha = false
-    }
-    if (Hero.isHittingTile(CollisionDirection.Top)) {
-        Hero.vy = 0
-    }
+	
 })
