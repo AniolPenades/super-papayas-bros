@@ -20,7 +20,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     scroller.scrollBackgroundWithSpeed(20, 0)
-    animation.setAction(Hero, ActionKind.Caminando_hacia_Izquierda)
 })
 function IniciarAnimacioesHero () {
     AnimacionCaminar()
@@ -34,8 +33,8 @@ controller.left.onEvent(ControllerButtonEvent.Released, function () {
 })
 function AnimacionCaminar () {
     CaminarPaIzquierda = animation.createAnimation(ActionKind.Caminando_hacia_Izquierda, 300)
-    animation.attachAnimation(Hero, CaminarPaDerecha)
-    CaminarPaDerecha.addAnimationFrame(img`
+    animation.attachAnimation(Hero, CaminarPaIzquierda)
+    CaminarPaIzquierda.addAnimationFrame(img`
         . . . . . . . . . . . . . . . . 
         . . . f f f f f f f . . . . . . 
         . . f e e e e e e e f . . . . . 
@@ -53,7 +52,7 @@ function AnimacionCaminar () {
         . . . f 9 9 9 9 6 f . . . . . . 
         . . . . f f f f f . . . . . . . 
         `)
-    CaminarPaDerecha.addAnimationFrame(img`
+    CaminarPaIzquierda.addAnimationFrame(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . f f f f f f f . . . . . . 
@@ -71,7 +70,7 @@ function AnimacionCaminar () {
         . . . f 9 9 6 f f 9 9 9 9 f . . 
         . . . . f f f . f f f f f . . . 
         `)
-    CaminarPaDerecha.addAnimationFrame(img`
+    CaminarPaIzquierda.addAnimationFrame(img`
         . . . . . . . . . . . . . . . . 
         . . . f f f f f f f . . . . . . 
         . . f e e e e e e e f . . . . . 
@@ -89,7 +88,7 @@ function AnimacionCaminar () {
         . . . f 9 9 9 9 6 f . . . . . . 
         . . . . f f f f f . . . . . . . 
         `)
-    CaminarPaDerecha.addAnimationFrame(img`
+    CaminarPaIzquierda.addAnimationFrame(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . f f f f f f f . . . . . . 
@@ -108,7 +107,7 @@ function AnimacionCaminar () {
         . f f f f . f f f . . . . . . . 
         `)
     CaminarPaDerecha = animation.createAnimation(ActionKind.Caminando_hacia_Derecha, 300)
-    animation.attachAnimation(Hero, CaminarPaIzquierda)
+    animation.attachAnimation(Hero, CaminarPaDerecha)
     CaminarPaDerecha.addAnimationFrame(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . f f f f f f f . . . 
@@ -184,7 +183,6 @@ function AnimacionCaminar () {
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     scroller.scrollBackgroundWithSpeed(-20, 0)
-    animation.setAction(Hero, ActionKind.Caminando_hacia_Derecha)
 })
 info.onLifeZero(function () {
     game.over(false)
@@ -193,22 +191,22 @@ let CaminarPaDerecha: animation.Animation = null
 let CaminarPaIzquierda: animation.Animation = null
 let Hero: Sprite = null
 Hero = sprites.create(img`
-    . . f f f f f f f f f f . . . . 
-    . f e e e e e e e e e e f . . . 
-    . f e e e e e e e e e e e f . . 
-    . f e e d d d d d d d d d f . . 
-    . f e d d f 1 d d d f 1 d f . . 
-    f d d d d f f d d d f f d f . . 
-    f d d d d d d d f d d d d f . . 
-    . f d d d d d d d d d d d f . . 
-    . f 8 8 8 8 7 7 7 8 8 8 8 f . . 
-    . f 8 8 8 8 7 8 7 8 8 8 8 f . . 
-    . f d d d 8 7 7 7 8 8 d d f . . 
-    . f d d 8 8 7 8 8 8 8 8 d f . . 
-    . f b b b b b e e b b b f . . . 
-    . . f 6 9 9 f f 6 9 9 f . . . . 
-    . . f 6 9 9 f f 6 9 9 f . . . . 
-    . . . f f f . . f f f . . . . . 
+    . . . . . 2 2 2 2 2 . . . . . . 
+    . . . . 2 2 2 2 2 2 2 2 2 2 . . 
+    . . . . e e e d d e d . . . . . 
+    . . . e d e d d d e d d d d . . 
+    . . . e d e e d d d e d d d . . 
+    . . . e e d d d d e e e e . . . 
+    . . . . . d d d d d d d d . . . 
+    . . . . e e 2 e e e . . . . . . 
+    . . . e e e 2 e e 2 e e e . . . 
+    . . e e e e 2 2 2 2 e e e e . . 
+    . . d d e 2 5 2 2 5 2 e d d . . 
+    . . d d d 2 2 2 2 2 2 d d d . . 
+    . . d d 2 2 2 2 2 2 2 2 d d . . 
+    . . . . 2 2 2 . . 2 2 2 . . . . 
+    . . . e e e . . . . e e e . . . 
+    . . e e e e . . . . e e e e . . 
     `, SpriteKind.Player)
 Hero.setPosition(8, 8)
 controller.moveSprite(Hero, 80, 0)
@@ -407,5 +405,14 @@ if (info.score() == 1000) {
 }
 IniciarAnimaciones()
 game.onUpdate(function () {
-	
+    if (Hero.isHittingTile(CollisionDirection.Top)) {
+        Hero.vy = 0
+    }
+    if (Hero.vx < 0) {
+        animation.setAction(Hero, ActionKind.Caminando_hacia_Izquierda)
+    } else if (Hero.vx > 0) {
+        animation.setAction(Hero, ActionKind.Caminando_hacia_Derecha)
+    } else if (Hero.vx == 0) {
+    	
+    }
 })
