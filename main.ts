@@ -74,12 +74,14 @@ function IniciarAnimacioesHero () {
 }
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     scroller.scrollBackgroundWithSpeed(0, 0)
+    animation.setAction(Hero, ActionKind.Mirando_hacia_derecha)
 })
 controller.left.onEvent(ControllerButtonEvent.Released, function () {
     scroller.scrollBackgroundWithSpeed(0, 0)
+    animation.setAction(Hero, ActionKind.Mirando_hacia_Izquierda)
 })
 function AnimacionCaminar () {
-    CaminarPaIzquierda = animation.createAnimation(ActionKind.Caminando_hacia_Izquierda, 300)
+    CaminarPaIzquierda = animation.createAnimation(ActionKind.Caminando_hacia_Izquierda, 100)
     animation.attachAnimation(Hero, CaminarPaIzquierda)
     CaminarPaIzquierda.addAnimationFrame(img`
         . . . . . . 2 2 2 2 2 . . . . . 
@@ -153,7 +155,7 @@ function AnimacionCaminar () {
         . . . e e e . . . . e e e . . . 
         . . e e e e . . . . e e e e . . 
         `)
-    CaminarPaDerecha = animation.createAnimation(ActionKind.Caminando_hacia_Derecha, 300)
+    CaminarPaDerecha = animation.createAnimation(ActionKind.Caminando_hacia_Derecha, 100)
     animation.attachAnimation(Hero, CaminarPaDerecha)
     CaminarPaDerecha.addAnimationFrame(img`
         . . . . . 2 2 2 2 2 . . . . . . 
@@ -497,8 +499,5 @@ game.onUpdate(function () {
         animation.setAction(Hero, ActionKind.Caminando_hacia_Izquierda)
     } else if (Hero.vx > 0) {
         animation.setAction(Hero, ActionKind.Caminando_hacia_Derecha)
-    } else if (Hero.vx == 0) {
-        animation.setAction(Hero, ActionKind.Mirando_hacia_derecha)
-        animation.setAction(Hero, ActionKind.Mirando_hacia_Izquierda)
     }
 })
