@@ -359,19 +359,19 @@ let Goomba = sprites.create(img`
     . . . . . . e e e e . . . . . . 
     . . . . . e e e e e e . . . . . 
     . . . . e e e e e e e e . . . . 
-    . . . e f f e e e e f f e . . . 
-    . . e e e d f e e f d e e e . . 
-    . . e e e d f e e f d e e e . . 
-    . e e e e d f e e f d e e e e . 
-    . 3 e 3 e d f d d f d 3 e 3 e . 
-    . e 3 e 3 d d d d d d e 3 e 3 . 
-    . e e e e e e e e e e e e e e . 
-    . . e e e d d d d d d e e e . . 
+    . . . e e e e e e e e e e . . . 
+    . . e f f e e e e e e f f e . . 
+    . e e e d f e e e e f d e e e . 
+    . e e e d f e e e e f d e e e . 
+    e 3 e 3 d f d e e d f d e 3 e 3 
+    3 e 3 e d d d e e d d d 3 e 3 e 
+    e e e e e e e e e e e e e e e e 
+    . e e e e d d d d d d e e e e . 
     . . . . d d d d d d d d . . . . 
-    . . f f d d d d d d d d f f . . 
+    . . . . d d d d d d d d . . . . 
+    . . f f f d d d d d d f f f . . 
     . f f f f f d d d d f f f f f . 
     . f f f f f f . . f f f f f f . 
-    . . f f f f f . . f f f f f . . 
     `, SpriteKind.Player)
 let Coin = sprites.create(img`
     . . . . . f f f f f f . . . . . 
