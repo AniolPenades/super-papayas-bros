@@ -3,7 +3,9 @@ enum ActionKind {
     Idle,
     Jumping,
     Caminando_hacia_Derecha,
-    Caminando_hacia_Izquierda
+    Caminando_hacia_Izquierda,
+    Mirando_hacia_derecha,
+    Mirando_hacia_Izquierda
 }
 namespace SpriteKind {
     export const Coin = SpriteKind.create()
@@ -15,7 +17,46 @@ function IniciarAnimaciones () {
     IniciarAnimacioesHero()
 }
 function MirarAnimacion () {
-	
+    Mirando_a_la_Derecha = animation.createAnimation(ActionKind.Mirando_hacia_derecha, 300)
+    animation.attachAnimation(Hero, Mirando_a_la_Derecha)
+    Mirando_a_la_Derecha.addAnimationFrame(img`
+        . . . . . 2 2 2 2 2 . . . . . . 
+        . . . . 2 2 2 2 2 2 2 2 2 2 . . 
+        . . . . e e e d d e d . . . . . 
+        . . . e d e d d d e d d d d . . 
+        . . . e d e e d d d e d d d . . 
+        . . . e e d d d d e e e e . . . 
+        . . . . . d d d d d d d d . . . 
+        . . . . e e 2 e e e . . . . . . 
+        . . . e e e 2 e e 2 e e e . . . 
+        . . e e e e 2 2 2 2 e e e e . . 
+        . . d d e 2 5 2 2 5 2 e d d . . 
+        . . d d d 2 2 2 2 2 2 d d d . . 
+        . . d d 2 2 2 2 2 2 2 2 d d . . 
+        . . . . 2 2 2 . . 2 2 2 . . . . 
+        . . . e e e . . . . e e e . . . 
+        . . e e e e . . . . e e e e . . 
+        `)
+    Mirando_hacia_Izquierda = animation.createAnimation(ActionKind.Mirando_hacia_Izquierda, 300)
+    animation.attachAnimation(Hero, Mirando_hacia_Izquierda)
+    Mirando_hacia_Izquierda.addAnimationFrame(img`
+        . . . . . . 2 2 2 2 2 . . . . . 
+        . . 2 2 2 2 2 2 2 2 2 2 . . . . 
+        . . . . . d e d d e e e . . . . 
+        . . d d d d e d d d e d e . . . 
+        . . d d d e d d d e e d e . . . 
+        . . . e e e e d d d d e e . . . 
+        . . . d d d d d d d d . . . . . 
+        . . . . . . e e e 2 e e . . . . 
+        . . . e e e 2 e e 2 e e e . . . 
+        . . e e e e 2 2 2 2 e e e e . . 
+        . . d d e 2 5 2 2 5 2 e d d . . 
+        . . d d d 2 2 2 2 2 2 d d d . . 
+        . . d d 2 2 2 2 2 2 2 2 d d . . 
+        . . . . 2 2 2 . . 2 2 2 . . . . 
+        . . . e e e . . . . e e e . . . 
+        . . e e e e . . . . e e e e . . 
+        `)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Hero.isHittingTile(CollisionDirection.Bottom)) {
@@ -195,6 +236,8 @@ info.onLifeZero(function () {
 })
 let CaminarPaDerecha: animation.Animation = null
 let CaminarPaIzquierda: animation.Animation = null
+let Mirando_hacia_Izquierda: animation.Animation = null
+let Mirando_a_la_Derecha: animation.Animation = null
 let Hero: Sprite = null
 Hero = sprites.create(img`
     . . . . . 2 2 2 2 2 . . . . . . 
@@ -455,6 +498,7 @@ game.onUpdate(function () {
     } else if (Hero.vx > 0) {
         animation.setAction(Hero, ActionKind.Caminando_hacia_Derecha)
     } else if (Hero.vx == 0) {
-    	
+        animation.setAction(Hero, ActionKind.Mirando_hacia_derecha)
+        animation.setAction(Hero, ActionKind.Mirando_hacia_Izquierda)
     }
 })
