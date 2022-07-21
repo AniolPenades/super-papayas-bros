@@ -5,6 +5,12 @@ enum ActionKind {
     Caminando_hacia_Derecha,
     Caminando_hacia_Izquierda
 }
+namespace SpriteKind {
+    export const Coin = SpriteKind.create()
+    export const Up = SpriteKind.create()
+    export const PlantaF = SpriteKind.create()
+    export const Seta = SpriteKind.create()
+}
 function IniciarAnimaciones () {
     IniciarAnimacioesHero()
 }
@@ -336,23 +342,59 @@ scene.setBackgroundImage(img`
     `)
 tiles.setCurrentTilemap(tilemap`level3`)
 let Seta = sprites.create(img`
-    . . . . . 4 4 4 4 2 2 . . . . . 
-    . . . . 4 4 4 4 2 2 2 2 . . . . 
-    . . . 4 4 4 4 4 2 2 2 2 2 . . . 
-    . . 4 4 4 4 4 4 4 2 2 2 4 4 . . 
-    . 4 4 2 2 2 4 4 4 4 4 4 4 4 4 . 
-    . 4 2 2 2 2 2 4 4 4 4 4 4 4 4 . 
-    4 4 2 2 2 2 2 4 4 4 4 4 2 2 4 4 
-    4 4 2 2 2 2 2 4 4 4 4 4 2 2 2 4 
-    4 4 4 2 2 2 4 4 4 4 4 4 4 2 2 4 
-    4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 
-    . 4 2 2 2 1 1 1 1 1 1 2 2 2 4 . 
-    . . . . 1 1 1 1 1 1 1 1 . . . . 
-    . . . . 1 1 1 1 1 1 4 1 . . . . 
-    . . . . 1 1 1 1 1 1 4 1 . . . . 
-    . . . . . 1 1 1 1 4 1 . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Player)
+    . . . . . f f f f f f . . . . . 
+    . . . f f 1 1 2 2 1 1 f f . . . 
+    . . f 1 1 1 2 2 2 2 1 1 1 f . . 
+    . f 2 2 2 2 2 2 2 2 2 2 2 2 f . 
+    . f 2 2 2 2 2 2 2 2 2 2 2 2 f . 
+    f 1 2 2 2 2 1 1 1 1 2 2 2 2 1 f 
+    f 1 1 2 2 1 1 1 1 1 1 2 2 1 1 f 
+    f 1 1 2 2 1 1 1 1 1 1 2 2 1 1 f 
+    f 1 2 2 2 2 1 1 1 1 2 2 2 2 1 f 
+    f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+    f 2 2 2 f f f f f f f f 2 2 2 f 
+    . f f f d d f d d f d d f f f . 
+    . . f d d d f d d f d d d f . . 
+    . . f d d d d d d d d d d f . . 
+    . . . f d d d d d d d d f . . . 
+    . . . . f f f f f f f f . . . . 
+    `, SpriteKind.Seta)
+let Planta_De_Fuego = sprites.create(img`
+    . . . . f f f f f f f f . . . . 
+    . . f f 2 2 2 2 2 2 2 2 f f . . 
+    . f 2 2 2 4 4 4 4 4 4 2 2 2 f . 
+    f 2 2 4 4 5 f 5 5 f 5 4 4 2 2 f 
+    f 2 2 4 5 1 f 1 1 f 1 5 4 2 2 f 
+    f 2 2 4 4 5 f 5 5 f 5 4 4 2 2 f 
+    . f 2 2 2 4 4 4 4 4 4 2 2 2 f . 
+    . . f f 2 2 2 2 2 2 2 2 f f . . 
+    . . . f f f f f f f f f f . . . 
+    . f f . . . f 7 7 f . . . f f . 
+    f 7 7 f f . f 7 7 f . f f 7 7 f 
+    f 7 7 7 f f f 7 7 f f f 7 7 7 f 
+    f 7 7 7 7 7 f 7 7 f 7 7 7 7 7 f 
+    . f 7 7 7 7 7 7 7 7 7 7 7 7 f . 
+    . . f f 7 7 7 7 7 7 7 7 f f . . 
+    . . . . f f f f f f f f . . . . 
+    `, SpriteKind.PlantaF)
+let _1_up = sprites.create(img`
+    . . . . . f f f f f f . . . . . 
+    . . . f f 1 1 7 7 1 1 f f . . . 
+    . . f 1 1 1 7 7 7 7 1 1 1 f . . 
+    . f 7 7 7 7 7 7 7 7 7 7 7 7 f . 
+    . f 7 7 7 7 7 7 7 7 7 7 7 7 f . 
+    f 1 7 7 7 7 1 1 1 1 7 7 7 7 1 f 
+    f 1 1 7 7 1 1 1 1 1 1 7 7 1 1 f 
+    f 1 1 7 7 1 1 1 1 1 1 7 7 1 1 f 
+    f 1 7 7 7 7 1 1 1 1 7 7 7 7 1 f 
+    f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+    f 7 7 7 f f f f f f f f 7 7 7 f 
+    . f f f d d f d d f d d f f f . 
+    . . f d d d f d d f d d d f . . 
+    . . f d d d d d d d d d d f . . 
+    . . . f d d d d d d d d f . . . 
+    . . . . f f f f f f f f . . . . 
+    `, SpriteKind.Up)
 let Goomba = sprites.create(img`
     . . . . . . e e e e . . . . . . 
     . . . . . e e e e e e . . . . . 
@@ -370,7 +412,7 @@ let Goomba = sprites.create(img`
     . . f f f d d d d d d f f f . . 
     . f f f f f d d d d f f f f f . 
     . f f f f f f . . f f f f f f . 
-    `, SpriteKind.Player)
+    `, SpriteKind.Enemy)
 let Coin = sprites.create(img`
     . . . . . f f f f f f . . . . . 
     . . . f f f 1 1 1 f f f f . . . 
@@ -388,7 +430,7 @@ let Coin = sprites.create(img`
     . . f f 1 5 5 5 5 5 5 f f . . . 
     . . . f f f 5 5 5 f f f f . . . 
     . . . . . f f f f f . . . . . . 
-    `, SpriteKind.Player)
+    `, SpriteKind.Coin)
 info.setLife(1)
 info.setScore(0)
 if (Hero.overlapsWith(Seta)) {
