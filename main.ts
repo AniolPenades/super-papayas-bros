@@ -523,6 +523,24 @@ let Coin = sprites.create(img`
     . . . f f f 5 5 5 f f f f . . . 
     . . . . . f f f f f . . . . . . 
     `, SpriteKind.Coin)
+let Blaque_Sorpresa = sprites.create(img`
+    5 4 4 4 4 4 4 4 4 4 4 4 4 4 4 5 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 f 5 5 5 5 5 5 5 5 5 5 f 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    4 5 f 5 5 5 5 5 5 5 5 5 5 f 5 4 
+    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+    5 4 4 4 4 4 4 4 4 4 4 4 4 4 4 5 
+    `, SpriteKind.Player)
 info.setLife(1)
 info.setScore(0)
 if (Hero.overlapsWith(Seta)) {
