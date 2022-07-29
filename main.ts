@@ -14,6 +14,9 @@ namespace SpriteKind {
     export const Up = SpriteKind.create()
     export const PlantaF = SpriteKind.create()
     export const Seta = SpriteKind.create()
+    export const Bloque_Sorpresa = SpriteKind.create()
+    export const Bloque = SpriteKind.create()
+    export const Bloque_Fin = SpriteKind.create()
 }
 function IniciarAnimaciones () {
     IniciarAnimacioesHero()
@@ -523,24 +526,6 @@ let Coin = sprites.create(img`
     . . . f f f 5 5 5 f f f f . . . 
     . . . . . f f f f f . . . . . . 
     `, SpriteKind.Coin)
-let Blaque_Sorpresa = sprites.create(img`
-    5 4 4 4 4 4 4 4 4 4 4 4 4 4 4 5 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 f 5 5 5 5 5 5 5 5 5 5 f 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    4 5 f 5 5 5 5 5 5 5 5 5 5 f 5 4 
-    4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
-    5 4 4 4 4 4 4 4 4 4 4 4 4 4 4 5 
-    `, SpriteKind.Player)
 info.setLife(1)
 info.setScore(0)
 if (Hero.overlapsWith(Seta)) {
